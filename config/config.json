@@ -4,7 +4,7 @@
     "username": "amanda",
     "password": "9xQ4ottTbM62vD74pKNcScouYkms1t0W",
     "database": "database_development",
-    "host": "postgres://localhost:5432/api_server_859u",
+    "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
