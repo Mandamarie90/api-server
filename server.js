@@ -1,28 +1,26 @@
+// server.js
 'use strict';
 
 const express = require('express');
 const cors = require('cors');
 
 const app = express();
-const logger = require('./middleware/logger.js')
 
 const notFoundHandler = require('./handlers/404.js');
 const errorHandler = require('./handlers/500.js');
-
-const foodRoutes = require('./routes/food.route.js');
-// const animalRoutes = require('./routes/animals.route.js');
-// const carsRoutes = require('./routes/cars.route.js')
+const foodRoutes = require('./routes/foodRoutes.js');
+const animalRoutes = require('./routes/animalRoutes.js');
+const logger = require('./middleware/logger.js');
 
 app.use(cors());
-app.use(logger());
 app.use(express.json());
 
 app.use(foodRoutes);
-// app.use(animalRoutes);
-// app.use(carsRoutes);
+app.use(animalRoutes);
+app.use(logger);
 
-// Force an error for the tests
-app.get('/broken', (req,res,next) => next('whoops!'));
+// Error Handling
+app.get('/broken', (req, res, next) => next(new Error('500 – Internal Server Error')));
 
 app.use('*', notFoundHandler);
 app.use(errorHandler);
