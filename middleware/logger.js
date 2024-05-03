@@ -1,11 +1,11 @@
 'use strict';
+// Logger middleware function
+const logger = (req, res, next) => {
+  // Log the request method and URL
+  console.log(`${req.method} ${req.url}`);
+  // Move to the next middleware function
+  next();
+};
 
-function logger( req, res, next ) {
-    console.log(`${req.method} ${req.path}`);
-    console.log(`${req.requestTime}`);
-    console.log(`${JSON.stringify(req.query)}`);
-    console.log('');
-    next();
-}
-
+// Export the logger middleware function
 module.exports = logger;

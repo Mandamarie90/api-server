@@ -16,7 +16,7 @@
   "main": "server.js",
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_ENV=test jest --watchAll --coverage",
     "start": "node server.js",
     "init:config": "sequelize init:config",
     "db:create": "sequelize db:create"

@@ -1,22 +1,22 @@
+// models/index.js
 'use strict';
 
+require('dotenv').config();
 const { Sequelize, DataTypes } = require('sequelize');
 
+const foodModel = require('./food.js');
+const animalModel = require('./animal.js');
+
 const DATABASE_URL = process.env.NODE_ENV === 'test' ? 'sqlite:memory' : process.env.DATABASE_URL;
+console.log('Database URL:', DATABASE_URL);
 
 let sequelize = new Sequelize(DATABASE_URL, {
   dialect: 'postgres',
   logging: false,
 });
-sequelize.sync({ force:true});
-
-// let animals = require('./animals.js');
-// let cars = require('./cars.js');
-let foods= require('./food.model.js');
 
 module.exports = {
   db: sequelize,
-  // Animal: animals(sequelize, DataTypes),
-  // Cars: cars(sequelize, DataTypes),
-  Food: foods(sequelize, DataTypes),
+  Food: foodModel(sequelize, DataTypes),
+  Animal: animalModel(sequelize, DataTypes),
 };
