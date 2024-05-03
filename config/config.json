@@ -1,0 +1,24 @@
+
+{
+  "development": {
+    "username": "amanda",
+    "password": "9xQ4ottTbM62vD74pKNcScouYkms1t0W",
+    "database": "database_development",
+    "host": "postgres://localhost:5432/api_server_859u",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "amanda",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "amanda",
+    "password": "9xQ4ottTbM62vD74pKNcScouYkms1t0W",
+    "database": "database_production",
+    "host": "https://dpg-copciksf7o1s73dtqilg-a.oregon-postgres.render.com",
+    "dialect": "postgres"
+  }
+}
