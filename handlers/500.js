@@ -8,7 +8,7 @@ function handleErrors( error, request, response, next ) {
     body: request.body,
     query: request.query,
     params: request.params,
-    error: error.message
+    error: error.message,
   };
   response.status(500).json(output);
 }

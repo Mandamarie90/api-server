@@ -1,18 +1,24 @@
 'use strict';
 
-const Book = (sequelize, DataTypes) => sequelize.define('Book', {
+const Books = (sequelize, DataTypes) => sequelize.define('Books', {
   title: {
     type: DataTypes.STRING,
     allowNull: false,
   },
   genre: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
-  authorID:{
+  authorId: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    references: {
+      model: 'Authors', // Ensure this matches the table name as Sequelize sees it
+      key: 'id',
+    },
   },
+}, {
+  timestamps: false,  // Disable automatic timestamp generation
 });
 
-module.exports = Book;
+module.exports = Books;
