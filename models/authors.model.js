@@ -1,5 +1,6 @@
 'use strict';
-const Author = (sequelize, DataTypes) => sequelize.define('Author',{
+
+const Author = (sequelize, DataTypes) => sequelize.define('Author', {
   firstName: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -8,6 +9,8 @@ const Author = (sequelize, DataTypes) => sequelize.define('Author',{
     type: DataTypes.STRING,
     allowNull: false,
   },
+}, {
+  timestamps: false,  // Disable automatic timestamp generation
 });
 
 module.exports = Author;

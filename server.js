@@ -11,17 +11,17 @@ const errorHandler = require('./handlers/500.js');
 const foodRoutes = require('./routes/foodRoutes.js');
 const animalRoutes = require('./routes/animalRoutes.js');
 const authorRoutes = require('./routes/authorRoutes.js');
-const booksRoutes = require('./routes/booksRoutes.js');
-const logger = require('./middleware/logger.js');
+const bookRoutes = require('./routes/booksRoutes.js');
+// const logger = require('./middleware/logger.js');
 
 app.use(cors());
 app.use(express.json());
 
 app.use(foodRoutes);
 app.use(animalRoutes);
-app.use(authorRoutes);
-app.use(booksRoutes);
-app.use(logger);
+app.use('/authors', authorRoutes);
+app.use('/books', bookRoutes);
+// app.use(logger);
 
 // Error Handling
 app.get('/broken', (req, res, next) => next(new Error('500 – Internal Server Error')));

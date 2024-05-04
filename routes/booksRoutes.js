@@ -5,7 +5,8 @@
 const express = require('express');
 const router = express.Router();
 
-const {Authors, Books} = require('../models/index.js');
+const { Authors } = require('../models/index.js');
+const { Books } = require('../models/books.model.js');
 
 const Model = Books;
 
@@ -18,8 +19,8 @@ router.delete('/:id', deleteRecord);
 async function getAll( request, response ) {
   let data = await Model.read(null, {
     include: {
-      model: Authors.model
-    }
+      model: Authors.model,
+    },
   });
   response.status(200).json(data);
 }
@@ -28,8 +29,8 @@ async function getOne( request, response ) {
   let id = request.params.id;
   let data = await Model.read(id, {
     include: {
-      model: Authors.model
-    }
+      model: Authors.model,
+    },
   });
   response.status(200).json(data);
 }

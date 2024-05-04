@@ -18,7 +18,7 @@
     "username": "amanda",
     "password": "9xQ4ottTbM62vD74pKNcScouYkms1t0W",
     "database": "database_production",
-    "host": "https://dpg-copciksf7o1s73dtqilg-a.oregon-postgres.render.com",
+    "host": "127.0.0.1",
     "dialect": "postgres"
   }
 }

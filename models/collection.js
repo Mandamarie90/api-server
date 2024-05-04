@@ -2,9 +2,11 @@
 
 class Collection {
 
-  constructor(model) {
+  constructor( model ) {
     this.model = model;
   }
+
+  // CRUD METHODS
 
   async create( data ) {
     try {
@@ -18,7 +20,7 @@ class Collection {
 
   async read( id, options={} ) {
     let records = null;
-    try{
+    try {
       if(id) {
         options.where = { id };
         records = await this.model.findOne(options);
@@ -42,12 +44,13 @@ class Collection {
       return e;
     }
   }
-  async delete (id) {
+
+  async delete( id ) {
     try {
-      if(!id) throw new Error('NoID provided for delete operation');
-      let deletedRecord = await this.create.model.destroy({where: {id}});
+      if(!id) throw new Error('No ID provided for delete operation');
+      let deletedRecord = await this.model.destroy({where: {id}});
       return deletedRecord;
-    } catch(e){
+    } catch(e) {
       console.log('Error deleting data for model', this.model.name);
       return e;
     }
@@ -55,5 +58,3 @@ class Collection {
 }
 
 module.exports = Collection;
-
-

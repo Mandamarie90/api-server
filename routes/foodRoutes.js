@@ -31,7 +31,7 @@ router.get('/foods/:id', async (req, res, next) => {
 });
 
 // POST a new food
-router.post('/food', async (req, res, next) => {
+router.post('/foods', async (req, res, next) => {
   try {
     const food = await Food.create(req.body);
     res.status(201).json(food);

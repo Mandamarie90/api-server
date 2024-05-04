@@ -1,41 +1,38 @@
 // models/index.js
 'use strict';
-
 require('dotenv').config();
-const { Sequelize, DataTypes } = require('sequelize');
-const Collection = require('./collection.js');
-
-const foodModel = require('./food.js');
-const animalModel = require('./animal.js');
-const booksSchema = require('./books.model.js');
-const authorSchema= require('./authors.model.js');
-
-
-
-
 
 const DATABASE_URL = process.env.NODE_ENV === 'test' ? 'sqlite:memory' : process.env.DATABASE_URL;
 console.log('Database URL:', DATABASE_URL);
+
+
+const { Sequelize, DataTypes } = require('sequelize');
 
 let sequelize = new Sequelize(DATABASE_URL, {
   dialect: 'postgres',
   logging: false,
 });
 
+const Collection = require('./collection.js');
+const authorSchema = require('./authors.model.js');
+const bookSchema = require('./books.model.js');
+const foodModel = require('./food.js');
+const animalModel = require('./animal.js');
 
-const booksModel = booksSchema(sequelize, DataTypes);
-const authorModel = authorSchema(sequelize, DataTypes);
+const authorsModel = authorSchema(sequelize, DataTypes);
+const booksModel = bookSchema(sequelize, DataTypes);
 
-authorModel.hasMany(booksModel, {foreignKey:'authorId', sourceKey: 'id'});
-booksModel.belongsTo(authorModel,{foreignKey:'authorId', targetKey:'id'});
+// foreign key is the column name in the child table that references the sourceKey in the parent table
+authorsModel.hasMany(booksModel, {foreignKey: 'authorId', sourceKey: 'id'});
+booksModel.belongsTo(authorsModel, {foreignKey: 'authorId', targetKey: 'id'});
 
-const authorCollection = new Collection(authorModel);
+const authorsCollection = new Collection(authorsModel);
 const booksCollection = new Collection(booksModel);
 
 module.exports = {
   db: sequelize,
+  Authors: authorsCollection,
+  Books: booksCollection,
   Food: foodModel(sequelize, DataTypes),
   Animal: animalModel(sequelize, DataTypes),
-  Author: authorCollection,
-  Books: booksCollection
 };
